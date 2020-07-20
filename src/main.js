@@ -17,7 +17,8 @@ app.stage.interactive = true;
 window.app = app;
 app.renderer.plugins.interaction.on('pointerdown', onPointerDown);
 
-const time = 5;
+let time = 5;
+let numOfShapes = 0;
 
 function onPointerDown() {
   const shape = new PIXI.Graphics();
@@ -53,6 +54,8 @@ function onPointerDown() {
     y: 600, duration: time, repeat: 0,
   });
 
+  numOfShapes = numOfShapes + 1;
+
   app.stage.addChild(shape);
 }
 
@@ -70,10 +73,12 @@ function shapeTypeGenerator() {
 function shapeSidesGenerator(min, max) {
   const path = [];
   const pathLength = Math.floor(Math.random() * (max - min) + min);
+  const shapeMax = 300;
+  const shapeMin = 100;
 
   for (let i = 0; i < pathLength; i++) {
-    path.push(Math.floor(Math.random() * 200));
-    path.push(Math.floor(Math.random() * 200));
+    path.push(Math.floor(Math.random() * (shapeMax - shapeMin) + shapeMin));
+    path.push(Math.floor(Math.random() * (shapeMax - shapeMin) + shapeMin));
   }
 
   return path;
@@ -88,3 +93,25 @@ function getRandomColor() {
 
   return '0x' + color;
 }
+
+function gravityIncrease() {
+  document.getElementById('gravity-value')
+    .innerHTML = `Gravity value: ${time}`;
+
+  return time++;
+}
+
+function gravityDecrease() {
+  if (time > 0) {
+    document.getElementById('gravity-value')
+      .innerHTML = `Gravity value: ${time}`;
+
+    return time--;
+  }
+}
+
+document.getElementById('gravity-increase')
+  .addEventListener('click', gravityIncrease);
+
+document.getElementById('gravity-decrease')
+  .addEventListener('click', gravityDecrease);

@@ -9,17 +9,17 @@
     <script type="module" src="main.js"></script>
   </head>
   <body>
-    <div class="wrapper">
-      <div>Num of current shapes: </div>
-      <div>
-        <button>+</button>
-        <button>-</button>
-        <div>Number of shapes per sec: </div>
+    <div class="shapes">
+      <div id="shapes__quantity" class="shapes__quantity">Num of current shapes: </div>
+      <div class="shapes__quantity-per-sec">
+        <div class="shapes__text">Number of shapes per sec: </div>
+        <button class="shapes__button">-</button>
+        <button class="shapes__button">+</button>
       </div>
-      <div>
-        <button>+</button>
-        <button>-</button>
-        <div>Gravity value: </div>
+      <div class="shapes__gravity">
+        <div id="gravity-value" class="shapes__text">Gravity value: 5</div>
+        <button id="gravity-decrease" class="shapes__button">-</button>
+        <button id="gravity-increase" class="shapes__button">+</button>
       </div>
     </div>
   </body>
