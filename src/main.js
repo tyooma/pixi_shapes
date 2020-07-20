@@ -18,7 +18,7 @@ window.app = app;
 app.renderer.plugins.interaction.on('pointerdown', onPointerDown);
 
 let time = 5;
-let numOfShapes = 0;
+let shapesPerSecond = 1;
 
 function onPointerDown() {
   const shape = new PIXI.Graphics();
@@ -54,10 +54,49 @@ function onPointerDown() {
     y: 600, duration: time, repeat: 0,
   });
 
-  numOfShapes = numOfShapes + 1;
-
   app.stage.addChild(shape);
 }
+
+function shapesCreator() {
+  for (let i = 1; i <= shapesPerSecond; i++) {
+    const shape = new PIXI.Graphics();
+
+    shape.beginFill(getRandomColor());
+
+    const shapeType = shapeTypeGenerator();
+
+    if (shapeType === 'Circle') {
+      shape.drawCircle(0, 0, 32);
+      shape.endFill();
+      shape.x = Math.random() * 500;
+      shape.y = Math.random() * 500;
+    }
+
+    if (shapeType === 'Ellipse') {
+      shape.drawEllipse(0, 0, 50, 20);
+      shape.endFill();
+      shape.x = Math.random() * 500;
+      shape.y = Math.random() * 500;
+    }
+
+    if (shapeType === 'Polygon') {
+      const path = shapeSidesGenerator(3, 8);
+
+      shape.drawPolygon(path);
+      shape.x = Math.random() * 500;
+      shape.y = Math.random() * 500;
+      shape.endFill();
+    }
+
+    gsap.to(shape, {
+      y: 600, duration: time, repeat: 0,
+    });
+
+    app.stage.addChild(shape);
+  }
+}
+
+setInterval(shapesCreator, 1000);
 
 function shapeTypeGenerator() {
   const shapes = [
@@ -93,6 +132,26 @@ function getRandomColor() {
 
   return '0x' + color;
 }
+
+function shapesPerSecondIncrease() {
+  document.getElementById('shapes-per-sec-value')
+    .innerHTML = `Number of shapes per sec: ${shapesPerSecond}`;
+
+  return shapesPerSecond++;
+}
+
+function shapesPerSecondDecrease() {
+  document.getElementById('shapes-per-sec-value')
+    .innerHTML = `Number of shapes per sec: ${shapesPerSecond}`;
+
+  return shapesPerSecond--;
+}
+
+document.getElementById('shapes-per-sec-increase')
+  .addEventListener('click', shapesPerSecondIncrease);
+
+document.getElementById('shapes-per-sec-decrease')
+  .addEventListener('click', shapesPerSecondDecrease);
 
 function gravityIncrease() {
   document.getElementById('gravity-value')

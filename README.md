@@ -6,6 +6,7 @@
 - shapes falls down
 - falling is controlled by gravity value
 - ability to increase / decrease gravity value by click on the buttons
+- ability to increase / decrease shapes per second value by click on the buttons
 
 ## Used technologies:
 - HTML5
