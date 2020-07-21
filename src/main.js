@@ -2,8 +2,8 @@ import * as PIXI from 'pixi.js';
 import { gsap } from 'gsap';
 
 const app = new PIXI.Application({
-  width: 600,
-  heigth: 600,
+  width: 700,
+  heigth: 700,
   antialias: true,
   transparent: false,
   resolution: 1,
@@ -17,6 +17,12 @@ app.stage.interactive = true;
 window.app = app;
 app.renderer.plugins.interaction.on('pointerdown', onPointerDown);
 
+app.renderer.view.addEventListener('click', (event) => {
+  coords = [];
+  coords.push(event.offsetX, event.offsetY);
+});
+
+let coords = [];
 let time = 5;
 let shapesPerSecond = 1;
 let shapesQuantity = 0;
@@ -29,26 +35,26 @@ function onPointerDown() {
   const shapeType = shapeTypeGenerator();
 
   if (shapeType === 'Circle') {
-    shape.drawCircle(0, 0, 32);
+    shape.drawCircle(0, 0, Math.random() * 32);
     shape.endFill();
-    shape.x = Math.random() * 500;
-    shape.y = Math.random() * 500;
+    shape.x = coords[0];
+    shape.y = coords[1];
   }
 
   if (shapeType === 'Ellipse') {
-    shape.drawEllipse(0, 0, 50, 20);
+    shape.drawEllipse(0, 0, Math.random() * 50, Math.random() * 20);
     shape.endFill();
-    shape.x = Math.random() * 500;
-    shape.y = Math.random() * 500;
+    shape.x = coords[0];
+    shape.y = coords[1];
   }
 
   if (shapeType === 'Polygon') {
-    const path = shapeSidesGenerator(3, 8);
+    const path = shapeSidesGenerator(3, 6);
 
     shape.drawPolygon(path);
-    shape.x = Math.random() * 500;
-    shape.y = Math.random() * 500;
     shape.endFill();
+    shape.x = coords[0] - path[0];
+    shape.y = coords[1] - path[1];
   }
 
   gsap.to(shape, {
@@ -72,26 +78,26 @@ function shapesCreator() {
     const shapeType = shapeTypeGenerator();
 
     if (shapeType === 'Circle') {
-      shape.drawCircle(0, 0, 32);
+      shape.drawCircle(0, 0, Math.random() * 32);
       shape.endFill();
-      shape.x = Math.random() * 500;
-      shape.y = Math.random() * 500;
+      shape.x = Math.random() * 600;
+      shape.y = Math.random() * 600;
     }
 
     if (shapeType === 'Ellipse') {
-      shape.drawEllipse(0, 0, 50, 20);
+      shape.drawEllipse(0, 0, Math.random() * 50, Math.random() * 20);
       shape.endFill();
-      shape.x = Math.random() * 500;
-      shape.y = Math.random() * 500;
+      shape.x = Math.random() * 600;
+      shape.y = Math.random() * 600;
     }
 
     if (shapeType === 'Polygon') {
-      const path = shapeSidesGenerator(3, 8);
+      const path = shapeSidesGenerator(3, 6);
 
       shape.drawPolygon(path);
-      shape.x = Math.random() * 500;
-      shape.y = Math.random() * 500;
       shape.endFill();
+      shape.x = Math.random() * 600;
+      shape.y = Math.random() * 600;
     }
 
     gsap.to(shape, {
