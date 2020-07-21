@@ -19,6 +19,7 @@ app.renderer.plugins.interaction.on('pointerdown', onPointerDown);
 
 let time = 5;
 let shapesPerSecond = 1;
+let shapesQuantity = 0;
 
 function onPointerDown() {
   const shape = new PIXI.Graphics();
@@ -53,6 +54,11 @@ function onPointerDown() {
   gsap.to(shape, {
     y: 600, duration: time, repeat: 0,
   });
+
+  shapesQuantity++;
+
+  document.getElementById('shapes-quantity')
+    .innerHTML = `Num of current shapes: ${shapesQuantity}`;
 
   app.stage.addChild(shape);
 }
@@ -94,6 +100,11 @@ function shapesCreator() {
 
     app.stage.addChild(shape);
   }
+
+  shapesQuantity += shapesPerSecond;
+
+  document.getElementById('shapes-quantity')
+    .innerHTML = `Num of current shapes: ${shapesQuantity}`;
 }
 
 setInterval(shapesCreator, 1000);
@@ -134,17 +145,23 @@ function getRandomColor() {
 }
 
 function shapesPerSecondIncrease() {
+  shapesPerSecond++;
+
   document.getElementById('shapes-per-sec-value')
     .innerHTML = `Number of shapes per sec: ${shapesPerSecond}`;
 
-  return shapesPerSecond++;
+  return shapesPerSecond;
 }
 
 function shapesPerSecondDecrease() {
-  document.getElementById('shapes-per-sec-value')
-    .innerHTML = `Number of shapes per sec: ${shapesPerSecond}`;
+  if (shapesPerSecond > 0) {
+    shapesPerSecond--;
 
-  return shapesPerSecond--;
+    document.getElementById('shapes-per-sec-value')
+      .innerHTML = `Number of shapes per sec: ${shapesPerSecond}`;
+
+    return shapesPerSecond;
+  }
 }
 
 document.getElementById('shapes-per-sec-increase')
@@ -154,18 +171,22 @@ document.getElementById('shapes-per-sec-decrease')
   .addEventListener('click', shapesPerSecondDecrease);
 
 function gravityIncrease() {
+  time++;
+
   document.getElementById('gravity-value')
     .innerHTML = `Gravity value: ${time}`;
 
-  return time++;
+  return time;
 }
 
 function gravityDecrease() {
   if (time > 0) {
+    time--;
+
     document.getElementById('gravity-value')
       .innerHTML = `Gravity value: ${time}`;
 
-    return time--;
+    return time;
   }
 }
 
