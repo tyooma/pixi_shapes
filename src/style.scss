@@ -1,3 +1,37 @@
-h1 {
-  color: red;
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+.shapes {
+  font-family: Righteous, cursive;
+
+  &__quantity-per-sec {
+    display: flex;
+    align-items: center;
+  }
+
+  &__gravity {
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    margin-right: 5px;
+  }
+
+  &__button {
+    width: 20px;
+    height: 20px;
+  
+    border-radius: 50%;
+    border: none;
+  
+    color: #fff;
+    background-color: #ff3884;
+  
+    transition: background-color 0.3s;
+  
+    &:hover {
+      color: #000;
+      background-color: #fff0fa;
+    }
+  }
 }

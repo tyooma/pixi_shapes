@@ -3,11 +3,25 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FE Template</title>
+    <title>PIXI Shapes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
     <link rel="stylesheet" href="style.scss">
     <script type="module" src="main.js"></script>
   </head>
   <body>
-    <h1>FE Template</h1>
+    <div class="shapes">
+      <div id="shapes-quantity" class="shapes__quantity">Num of current shapes: 0</div>
+      <div class="shapes__quantity-per-sec">
+        <div id="shapes-per-sec-value" class="shapes__text">Number of shapes per sec: 1</div>
+        <button id="shapes-per-sec-decrease" class="shapes__button">-</button>
+        <button id="shapes-per-sec-increase" class="shapes__button">+</button>
+      </div>
+      <div class="shapes__gravity">
+        <div id="gravity-value" class="shapes__text">Gravity value: 5</div>
+        <button id="gravity-decrease" class="shapes__button">-</button>
+        <button id="gravity-increase" class="shapes__button">+</button>
+      </div>
+    </div>
+  </body>
   </body>
 </html>
